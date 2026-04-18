@@ -2,19 +2,20 @@ import { Component, signal } from '@angular/core';
 import {
   DeveloperRegistration
 } from './greetings/presentation/components/developer-registration/developer-registration';
+import { DeveloperGreeting } from './greetings/presentation/components/developer-greeting/developer-greeting';
 
 @Component({
   selector: 'app-root',
-  imports: [DeveloperRegistration],
+  imports: [DeveloperRegistration, DeveloperGreeting],
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  styleUrl: './app.css',
 })
 export class App {
   protected readonly title = signal('hello-angular-developer');
   public firstName: string = '';
   public lastName: string = '';
 
-  public updateRegisteredDeveloperInfo(developer: { firstName: string, lastName: string }): void {
+  public updateRegisteredDeveloperInfo(developer: { firstName: string; lastName: string }): void {
     this.firstName = developer.firstName;
     this.lastName = developer.lastName;
   }
@@ -23,5 +24,4 @@ export class App {
     this.firstName = '';
     this.lastName = '';
   }
-
 }
