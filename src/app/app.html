@@ -1,3 +1,6 @@
 <main>
+  <app-developer-registration
+    (developerRegistered)="updateRegisteredDeveloperInfo($event)"
+    (registrationDeferred)="resetRegisteredDeveloperInfo()"/>
 </main>
 
