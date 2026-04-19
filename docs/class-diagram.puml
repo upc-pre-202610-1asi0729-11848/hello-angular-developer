@@ -1,0 +1,63 @@
+@startuml
+' Class Diagram for Hello Angular Developer
+
+' Skin parameters for a cleaner look
+skinparam monochrome true
+skinparam classAttributeIconSize 0
+
+' Entities and Components
+class Developer {
+  -_firstName: string
+  -_lastName: string
+  +fullName: string
+}
+
+class "«Component»\nApp" as App {
+  +title: string
+  +firstName: string
+  +lastName: string
+  +updateRegisteredDeveloperInfo(developer: {firstName: string, lastName: string}): void
+  +resetRegisteredDeveloperInfo(): void
+}
+
+class "«Component»\n DeveloperRegistration" as DeveloperRegistration {
+  +developerForm: FormGroup
+  +developerRegistered: EventEmitter<{firstName: string, lastName: string}>
+  +registrationDeferred: EventEmitter<void>
+  +submitRegistrationRequest(): void
+  +deferRegistration(): void
+  +clearFields(): void
+}
+
+class "«Component»\n DeveloperGreeting" as DeveloperGreeting {
+  +firstName: string
+  +lastName: string
+  +fullName: string
+  +isRegistered: boolean
+}
+
+' Relationships
+App o--> "1" DeveloperRegistration : contains
+App o--> "1" DeveloperGreeting : contains
+DeveloperRegistration --> App : emits developerRegistered
+DeveloperRegistration --> App : emits later
+DeveloperGreeting --> "1" Developer : uses
+
+' Notes
+note right of Developer
+  Entity in greetings/model
+end note
+
+note right of App
+  Root component
+end note
+
+note right of DeveloperRegistration
+  Handles registration form
+end note
+
+note right of DeveloperGreeting
+  Displays greeting
+end note
+
+@enduml
